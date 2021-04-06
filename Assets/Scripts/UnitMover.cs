@@ -19,7 +19,7 @@ public class UnitMover : MonoBehaviour
 
         for(int i = 0; i < numUnits; i++)
         {
-            destinations[i] = moveToPosition + (new Vector3(currentRow, 0, currentColumn) * unitGap) - new Vector3(length / 2, 0, width /2);
+            destinations[i] = moveToPosition + (new Vector3(currentRow, 0, currentColumn) * unitGap) - new Vector3(length / 2, 0, width / 2);
             currentColumn++;
 
             if(currentColumn == rows)
