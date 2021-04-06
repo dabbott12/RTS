@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class SelectionMarker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float lifetime = 1.0f;
+
+    private void Start()
     {
-        
+        Destroy(gameObject, lifetime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

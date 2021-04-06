@@ -35,7 +35,7 @@ public class UnitSelection : MonoBehaviour
 
         if(Input.GetMouseButtonUp(0))
         {
-
+            ReleaseSelectionBox();
         }
 
         if(Input.GetMouseButton(0))
@@ -82,5 +82,34 @@ public class UnitSelection : MonoBehaviour
 
         selectionBox.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
         selectionBox.anchoredPosition = startPosition + new Vector2(width / 2, height / 2);
+    }
+
+    void ReleaseSelectionBox()
+    {
+        selectionBox.gameObject.SetActive(false);
+
+        Vector2 min = selectionBox.anchoredPosition - (selectionBox.sizeDelta / 2);
+        Vector2 max = selectionBox.anchoredPosition + (selectionBox.sizeDelta / 2);
+
+        foreach(Unit unit in player.units)
+        {
+            Vector3 screenPosition = cam.WorldToScreenPoint(unit.transform.position);
+
+            if(screenPosition.x > min.x && screenPosition.x < max.x && screenPosition.y > min.y && screenPosition.y < max.y)
+            {
+                selectedUnits.Add(unit);
+                unit.ToggleSelectionVisual(true);
+            }
+        }
+    }
+
+    public bool HasUnitsSelected()
+    {
+        return selectedUnits.Count > 0 ? true : false;
+    }
+
+    public Unit[] GetSelectedUnits()
+    {
+        return selectedUnits.ToArray();
     }
 }
